@@ -24,6 +24,7 @@ ru = lambda data: p.recvuntil(data)
 rl = lambda : p.recvline()
 
 elf = context.binary = ELF("./chall")
+libc = ELF("./libc.so.6")
 
 if args.REMOTE:
    p = remote("localhost", 5000)

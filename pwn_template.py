@@ -13,10 +13,6 @@ parser.add_argument("--output", type=str, help="Output path")
 
 args = parser.parse_args()
 
-libc = ""
-if args.libc:
-    libc = "libc = ELF(\"" + args.libc + "\")"
-
 remote_ip = "localhost"
 remote_port = "1337"
 
@@ -48,6 +44,10 @@ rl = lambda : p.recvline()
 """
 
 template += f"elf = context.binary = ELF(\"{args.EXECUTABLE}\")\n"
+
+if args.libc:
+    template += "libc = ELF(\"" + args.libc + "\")\n"
+
 template += "\n"
 template += "if args.REMOTE:\n"
 template += f"   p = remote(\"{remote_ip}\", {remote_port})\n"
